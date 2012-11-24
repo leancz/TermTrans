@@ -16,8 +16,12 @@ def main():
 
     @route('/translate/:term', method='GET')
     def translate_term(term):
-        return dict(translation = data[term])
-
+        if term in dict:
+            result = dict(translation = data[term])
+        else:
+            result = dict(error = 'Missing value')
+        return result
+        
     @route('/add/:canonical/:common', method=['GET', 'POST'])
     def add_term(canonical, common):
         data[common]=canonical
