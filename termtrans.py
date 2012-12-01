@@ -3,12 +3,15 @@
 import json
 import bottle
 from bottle import route, run
+
+database='translation.json'
+
 try:
-    with open('translation.json', 'rb') as fp:
+    with open(database, 'rb') as fp:
         data = json.load(fp)
 except IOError:
     # File doesn't exist, create it
-    with open('translation.json', 'wb') as fp:
+    with open(database, 'wb') as fp:
         json.dump({}, fp)
         data={}
 
@@ -31,7 +34,7 @@ def main():
     @route('/add/:canonical/:common', method=['GET', 'POST'])
     def add_term(canonical, common):
         data[common]=canonical
-        with open('translation.json', 'wb') as fp:
+        with open(database, 'wb') as fp:
             json.dump(data, fp)
 
 
