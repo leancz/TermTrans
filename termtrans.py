@@ -16,7 +16,7 @@ def main():
 
     @route('/translate/:term', method='GET')
     def translate_term(term):
-        if term in dict:
+        if term in data.keys():
             result = dict(translation = data[term])
         else:
             result = dict(error = 'Missing value')
