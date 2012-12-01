@@ -3,8 +3,14 @@
 import json
 import bottle
 from bottle import route, run
-with open('translation.json', 'rb') as fp:
-    data = json.load(fp)
+try:
+    with open('translation.json', 'rb') as fp:
+        data = json.load(fp)
+except IOError:
+    # File doesn't exist, create it
+    with open('translation.json', 'wb') as fp:
+        json.dump({}, fp)
+        data={}
 
 def main():
 
